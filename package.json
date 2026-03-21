@@ -1,4 +1,12 @@
 {
   "name": "app",
-  "private": "true"
+  "private": "true",
+  "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "husky": "^8.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  }
 }
