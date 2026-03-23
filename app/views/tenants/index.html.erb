@@ -16,7 +16,7 @@
             <h3 class="text-lg font-medium text-gray-900"><%= tenant.name %></h3>
             <p class="mt-1 text-sm text-gray-500">Subdomain: <%= tenant.subdomain %></p>
             <div class="mt-4">
-              <%= link_to "Enter Room", tenant_path(tenant, tenant_id: tenant.id), 
+              <%= link_to "Enter Room", coach_room_path(tenant.subdomain), 
                   class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" %>
             </div>
           </div>

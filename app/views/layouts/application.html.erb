@@ -11,20 +11,32 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%# 1. Rails 8 default CSS entry point is :app (app/assets/stylesheets/app.css) %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+
+    <%# 2. These two tags are CRITICAL for Turbo and JavaScript to work %>
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-gray-50">
+    <%# Shared navigation bar %>
+    <%= render "layouts/navbar" %>
+
+    <%# Flash Messages with fixed logic %>
+    <% flash.each do |type, message| %>
+      <%# Tailwind logic: notice -> green, alert/error -> red %>
+      <div class="<%= (type == 'notice') ? 'bg-green-500' : 'bg-red-500' %> text-white text-sm font-bold px-4 py-3 shadow-md" role="alert">
+        <p class="text-center"><%= message %></p>
+      </div>
+    <% end %>
+
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
