@@ -1,4 +1,6 @@
-# Fat Loss Pro - B2B2C Coaching SaaS (WIP)
+# Fat Loss Pro - B2B2C Coaching SaaS
+
+Status: 🚧 Work In Progress。
 
 ### 🚀 專案願景 (Project Vision)
 Fat Loss Pro 是一個專為「健身教練與個人工作室」打造的訂閱制管理平台。採用 **B2B2C (Business-to-Business-to-Consumer)** 架構，讓教練能擁有獨立的數位教室，向學員銷售減脂課程並追蹤健康數據。
