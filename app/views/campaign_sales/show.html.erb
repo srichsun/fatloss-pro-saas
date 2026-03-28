@@ -26,9 +26,11 @@
 
       <div class="bg-red-50 rounded-2xl p-4 border border-red-100 mb-8">
         <div class="flex items-center justify-between mb-2">
+        
           <span class="text-red-700 font-bold flex items-center gap-1">
-            🔥 Only <%= @campaign.remaining_stock %> left!
+            🔥 Only <%= @campaign.cached_remaining_stock %> left!
           </span>
+
           <span class="text-xs text-red-500 font-medium bg-white px-2 py-1 rounded-full shadow-sm">
             Selling Fast
           </span>
