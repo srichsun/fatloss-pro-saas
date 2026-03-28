@@ -10,9 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_03_27_132303) do
+ActiveRecord::Schema[8.2].define(version: 2026_03_28_065556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "flash_campaigns", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "expired_at"
+    t.string "influencer_name"
+    t.integer "price"
+    t.integer "remaining_stock", default: 0
+    t.bigint "tenant_id", null: false
+    t.string "title"
+    t.integer "total_stock", default: 0
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_flash_campaigns_on_tenant_id"
+    t.check_constraint "remaining_stock >= 0", name: "stock_cannot_be_negative"
+  end
+
+  create_table "flash_orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.bigint "flash_campaign_id", null: false
+    t.string "name"
+    t.string "phone"
+    t.string "status", default: "pending"
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_flash_orders_on_email"
+    t.index ["flash_campaign_id"], name: "index_flash_orders_on_flash_campaign_id"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
@@ -52,6 +106,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_132303) do
     t.index ["tenant_id"], name: "index_users_on_tenant_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "flash_campaigns", "tenants"
+  add_foreign_key "flash_orders", "flash_campaigns"
   add_foreign_key "orders", "tenants"
   add_foreign_key "orders", "users", column: "client_id"
   add_foreign_key "orders", "users", column: "coach_id"
