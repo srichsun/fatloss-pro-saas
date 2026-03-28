@@ -24,6 +24,14 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
+  # 1. Influencer/Coach Dashboard (Management)
+  resources :flash_campaigns, only: [:index, :new, :create, :show]
+
+  # 2. Fan/Public Landing Page (Publicly accessible)
+  # We use a custom path 'c/:id' to make the URL short for IG stories
+  resources :campaign_sales, path: 'c', oncology: [:show] do
+    resources :flash_orders, only: [:create]
+  end
 
   # Individual coach room (SaaS Tenant Space)
   resources :tenants, only: [:show]
