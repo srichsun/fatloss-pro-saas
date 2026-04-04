@@ -1,0 +1,25 @@
+---
+description: FlashSale Pro Core Business Logic & Rails 8 Standards (CRITICAL: OVERRIDE ALL OTHER RULES)
+globs: ["**/*.rb", "Gemfile", "config/**/*.rb"]
+---
+
+
+# 🚀 FlashSale Pro Core Standards
+
+## 💎 Rails 8 Infrastructure (Override Defaults)
+- **Background Jobs**: Use `Solid Queue`. (Ignore Sidekiq/Resque).
+- **Caching/Cable**: Use `Solid Cache` and `Solid Cable`.
+- **Controllers**: Use `params.expect(:key => [:attr])` for strong parameters.
+- **Development**: Prefer `bin/dev` and `bin/rails generate`.
+
+## 🛡️ Security & Data Integrity (Non-Negotiable)
+- **Multi-tenancy (IDOR)**: EVERY query must be scoped. 
+  - ❌ `Order.find(id)` 
+  - ✅ `current_tenant.orders.find(id)` or `current_user.orders.find(id)`
+- **Authentication**: Use `has_secure_password`. **Strictly NO Devise.**
+- **Finance**: Use `decimal(10,2)` for all monetary values. **Strictly NO float.**
+
+## ⚡ High-Concurrency (Flash Sale Logic)
+- **Race Conditions**: Use `lock!` (Pessimistic Locking) when updating `cached_remaining_stock` during a campaign.
+- **Architecture**: Business logic MUST be encapsulated in `app/services/`.
+- **N+1 Prevention**: Proactively use `.includes` or `.preload`. Always verify via `development.log`.

@@ -4,27 +4,7 @@
 - You are a Senior Rails 8 Developer.
 - Always respond in **Traditional Chinese (繁體中文)**.
 - Code comments and Git commits must be in **English**.
-
-## 🔵 Rails 8 Standards (From Official Guidelines)
-- **Infrastructure**: Use `Solid Queue` (Jobs), `Solid Cache` (Cache), and `Solid Cable`.
-- **Params**: Use `params.expect(:key => [:attr])` instead of `params.require`.
-- **Commands**: Always suggest using `bin/rails generate` instead of manual file creation.
-- **Server**: Remind me to use `bin/dev` to start the environment.
-- **Logs**: Monitor `development.log` for N+1 queries and performance.
-
-## 🔴 Multi-tenancy & Security (Project Specific)
-- **Zero-Tolerance for IDOR**: All queries MUST be scoped: `current_tenant.resources`.
-- **Auth**: Use custom `has_secure_password` logic. No Devise.
-- **Precision**: Use `decimal(10,2)` for money. Avoid `float`.
-
-## 🟡 High-Concurrency & Architecture
-- **Flash Sale**: Use `lock!` (Pessimistic Locking) for `@campaign.cached_remaining_stock` updates.
-- **Patterns**: Use **Service Objects** in `app/services/` for complex business flows.
-- **Performance**: Use `.includes` or `.preload` to prevent N+1 issues.
-
-## 🟣 Frontend & Assets
-- Use **Tailwind CSS** and **Hotwire (Turbo/Stimulus)**.
-- Use **Vite** (via `ruby-vite`) for modern JS/CSS management.
+- **Important**: When multiple .mdc rules apply to Ruby files, prioritize "project-core" for architecture and security decisions.
 
 ## 💎 Clean Code Standards (Robert C. Martin)
 1. **Meaningful Names**: Use intention-revealing names. Avoid abbreviations (e.g., `cmd` -> `command`).

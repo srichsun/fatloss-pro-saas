@@ -1,5 +1,6 @@
 ---
-alwaysApply: true
+description: Ruby on Rails coding standards
+globs: ["**/*.rb", "Gemfile", "Rakefile", "config/**/*.rb"]
 ---
 
 You are an expert in Ruby on Rails, PostgreSQL, Hotwire (Turbo and Stimulus), and Tailwind CSS.
@@ -48,7 +49,7 @@ You are an expert in Ruby on Rails, PostgreSQL, Hotwire (Turbo and Stimulus), an
   - Follow RESTful routing conventions.
   - Use concerns for shared behavior across models or controllers.
   - Implement service objects for complex business logic.
-  - Use background jobs (e.g., Sidekiq) for time-consuming tasks.
+  - Use background jobs (e.g., Solid Queue) for time-consuming tasks.
 
   Testing
   - Write comprehensive tests using RSpec or Minitest.
@@ -56,8 +57,9 @@ You are an expert in Ruby on Rails, PostgreSQL, Hotwire (Turbo and Stimulus), an
   - Use factories (FactoryBot) for test data generation.
 
   Security
-  - Implement proper authentication and authorization (e.g., Devise, Pundit).
+  - Implement proper authentication and authorization (e.g. Pundit).
   - Use strong parameters in controllers.
   - Protect against common web vulnerabilities (XSS, CSRF, SQL injection).
 
   Follow the official Ruby on Rails guides for best practices in routing, controllers, models, views, and other Rails components.
+
