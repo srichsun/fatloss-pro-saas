@@ -1,0 +1,19 @@
+---
+description: RSpec and Minitest conventions for models, requests, and system tests
+globs:
+  - spec/**/*.rb
+  - test/**/*.rb
+alwaysApply: false
+---
+
+# Testing
+
+- This repo may use **RSpec** (`spec/`) and **Minitest** (`test/`). Match the style and stack of the file you are editing (e.g. FactoryBot in RSpec, fixtures in Minitest if used).
+- **Tenant isolation**: For any code that touches tenant-scoped data, add or extend tests that prove another tenant cannot read or mutate another tenant’s records (IDOR).
+- Prefer **request or integration** tests for auth and HTTP boundaries; use **model** tests for validations and critical scopes; use **system** tests sparingly for critical user journeys (they are slower).
+- Use factories or fixtures consistently; keep setup in `let` / `setup` blocks readable. Avoid testing the framework; test behavior and contracts.
+- Name examples clearly (`it "rejects checkout when stock is zero"`). Keep one main assertion per example when practical.
+- For async behavior, use the test helpers appropriate to the adapter (e.g. Active Job test helpers with Solid Queue in test config as applicable).
+- **Standard**: Write tests for all Service Objects.
+- **Focus**: Test success paths, edge cases, and background job enqueuing.
+- **Mocking**: Use `ActiveJob::TestHelper` for mailer/job testing.

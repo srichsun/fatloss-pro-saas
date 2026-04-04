@@ -1,0 +1,15 @@
+---
+description: Service objects and complex business flows in app/services
+globs: app/services/**/*.rb
+alwaysApply: false
+---
+
+# Service Objects
+
+- Place multi-step or orchestration logic in `app/services/`. Keep controllers and models thin; services own the workflow.
+- One public entry point per service when possible (e.g. `call`, `perform`, or a descriptive class method). Prefer small private methods; aim for single responsibility.
+- Accept explicit dependencies (records, IDs, value objects) rather than reaching for global state. Scope all data access through the current tenant: `current_tenant.*` — never query by raw user-supplied IDs without tenant scope (IDOR risk).
+- Use transactions for operations that must succeed or fail together. Use `lock!` / pessimistic locking when updating contested resources (e.g. flash sale inventory).
+- Raise domain-specific exceptions or let ActiveRecord validations fail; avoid returning `(success, error_code)` tuples for normal control flow.
+- For work that belongs in the background, enqueue Active Job and keep the service idempotent where retries matter (Solid Queue).
+- Code comments in English; explain *why* a rule or edge case exists, not *what* the next line does.

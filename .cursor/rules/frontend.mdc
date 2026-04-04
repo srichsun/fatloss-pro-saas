@@ -1,0 +1,17 @@
+---
+description: Tailwind, Hotwire (Turbo/Stimulus), and Vite asset conventions
+globs:
+  - app/views/**/*
+  - app/javascript/**/*
+  - app/assets/**/*
+alwaysApply: false
+---
+
+# Frontend & Assets
+
+- Use **Tailwind CSS** for layout and styling; prefer utility classes and existing design patterns over one-off inline styles.
+- Use **Hotwire**: Turbo for navigation and partial updates; **Stimulus** for discrete client behavior. Avoid heavy client-side frameworks unless the project already depends on them.
+- Manage modern JS/CSS through **Vite** (`ruby-vite`). Put entry points and packs where the app already expects them; do not bypass the build for production assets.
+- Keep views mostly free of business logic: use helpers, presenters, or view components when presentation logic grows.
+- User-facing copy should go through **I18n** where the rest of the app does; avoid hardcoding long strings in multiple places.
+- Respect accessibility: semantic HTML, labels for forms, sufficient contrast. Prefer progressive enhancement with Turbo.
