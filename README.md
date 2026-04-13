@@ -49,8 +49,12 @@ Current Progress: Successfully implemented Pessimistic Locking and Redis Caching
 
 #### 1. Zero-Overselling Logic (防超賣機制)
 在高併發下，最怕「10 個名額賣給 11 個人」。
-* **Pessimistic Locking**: 透過 `@campaign.lock!` 實作資料庫列級鎖定（Row-Level Lock），確保扣庫存的原子性 (Atomicity)。
-* **Transaction Integrity**: 結合資料庫事務，確保「扣庫存」與「訂單建立」若有一方失敗則全數回滾。
+
+「我利用資料庫事務（Transaction）來確保『讀取庫存 + 扣除庫存 + 建立訂單』這一組動作的完整性。
+同時，我配合使用悲觀鎖（Pessimistic Locking / `@campaign.lock!`）來防止 Race Condition（競態條件），確保在極短時間內湧入的併發請求，不會導致超賣。」
+
+- **Pessimistic Locking**：透過 `@campaign.lock!` 實作資料庫列級鎖定（Row-Level Lock），確保「讀取庫存 + 扣除庫存」這組動作的隔離性（Isolation），防止 Race Condition。
+- **Transaction Integrity**：結合資料庫事務，確保「扣庫存」與「訂單建立」若有一方失敗則全數回滾，保證動作的原子性 (Atomicity)。
 
 
 #### 2. Redis Performance Optimization (效能優化)
