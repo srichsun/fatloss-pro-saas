@@ -17,11 +17,19 @@
   </div>
 
   <%# Shareable URL %>
-  <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl mb-6">
+  <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl mb-6" data-controller="clipboard">
     <p class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">Public Flash Sale URL</p>
-    <code class="block text-sm font-mono text-indigo-700 bg-white px-3 py-2 rounded border border-indigo-200 break-all">
-      <%= campaign_sale_url(@flash_campaign) %>
-    </code>
+    <div class="flex items-center gap-2">
+      <code class="flex-1 text-sm font-mono text-indigo-700 bg-white px-3 py-2 rounded border border-indigo-200 break-all" data-clipboard-target="source">
+        <%= campaign_sale_url(@flash_campaign) %>
+      </code>
+      <button type="button"
+              data-action="clipboard#copy"
+              data-clipboard-target="button"
+              class="shrink-0 inline-flex items-center px-3 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold shadow-sm hover:bg-indigo-700 transition active:scale-95">
+        Copy
+      </button>
+    </div>
   </div>
 
   <%# Stats Grid %>
