@@ -33,10 +33,4 @@ Rails.application.routes.draw do
     resources :flash_orders, only: [ :create ]
   end
 
-  # Individual coach room (SaaS Tenant Space)
-  resources :tenants, only: [ :index, :show ]
-
-  # Define a dynamic parameter named :subdomain
-  # 'as: :coach_room' generates the 'coach_room_path' helper method
-  get "/:subdomain", to: "tenants#show", as: :coach_room
 end

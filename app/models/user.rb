@@ -3,6 +3,4 @@ class User < ApplicationRecord
   belongs_to :tenant
 
   validates :name, presence: true
-
-  enum :role, { coach: 0, client: 1 }
 end

@@ -1,0 +1,47 @@
+<div class="min-h-screen bg-slate-50 flex">
+  <%# Sidebar %>
+  <aside class="w-64 bg-indigo-900 text-white hidden md:block">
+    <div class="p-6">
+      <h2 class="text-2xl font-bold tracking-tight">FlashSale Pro</h2>
+    </div>
+    <nav class="mt-6 px-4 space-y-2">
+      <a href="#" class="block px-4 py-2 bg-indigo-800 rounded-lg text-sm font-medium">Dashboard</a>
+      <%= link_to 'Flash Sales', flash_campaigns_path, class: "block px-4 py-2 hover:bg-indigo-800 rounded-lg text-sm font-medium transition" %>
+    </nav>
+  </aside>
+
+  <%# Main Content %>
+  <main class="flex-1 p-4 md:p-10">
+    <div class="max-w-5xl mx-auto">
+
+      <%# Header %>
+      <header class="mb-10">
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Storefront Overview</h1>
+        <p class="text-slate-500 mt-1">Managing <%= current_tenant.name %>.</p>
+      </header>
+
+      <%# Stats Grid %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+          <p class="text-sm font-medium text-slate-500">Active Flash Sales</p>
+          <p class="text-4xl font-black text-indigo-600 mt-2">
+            <%= current_tenant.flash_campaigns.count %>
+          </p>
+          <div class="mt-4">
+            <%= link_to 'Manage Flash Sales →', flash_campaigns_path, class: "text-sm text-indigo-600 font-bold hover:underline" %>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+          <p class="text-sm font-medium text-slate-500">Quick Action</p>
+          <div class="mt-2">
+            <%= link_to new_flash_campaign_path, class: "inline-flex items-center px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-bold shadow-md hover:bg-indigo-700 transition" do %>
+              + New Flash Sale
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
