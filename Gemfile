@@ -46,6 +46,10 @@ gem "redis"
 gem "anthropic"
 
 group :development, :test do
+  # Loads .env into ENV so secrets like ANTHROPIC_API_KEY can stay
+  # out of git but still reach the app locally.
+  gem "dotenv-rails"
+
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
