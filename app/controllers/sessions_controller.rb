@@ -10,8 +10,8 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
 
     if user&.authenticate(params[:password]) # # Securely verify password only if the user exists (prevents NoMethodError if user is nil)
-      session[:user_id] = user.id # This is the Session Handling part
-      redirect_to tenant_path(user.tenant), notice: "Logged in successfully!"
+      session[:user_id] = user.id
+      redirect_to dashboard_path, notice: "Logged in successfully!"
     else
       flash.now[:alert] = "Invalid email or password."
       render :new, status: :unauthorized
