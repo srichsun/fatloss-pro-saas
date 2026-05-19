@@ -16,8 +16,9 @@ services:
         fromDatabase:
           name: flashsalepro-db
           property: connectionString
-      - key: RAILS_MASTER_KEY
-        sync: false
+      # Auto-generated on first deploy; rotated by recreating the service.
+      - key: SECRET_KEY_BASE
+        generateValue: true
       # Run Solid Queue inside the Puma process — saves a worker service.
       - key: SOLID_QUEUE_IN_PUMA
         value: "true"
