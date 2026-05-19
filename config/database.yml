@@ -88,19 +88,8 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
-    <<: *default
-    url: <%= ENV["DATABASE_URL"] %>
-  # cache / queue / cable share the primary physical DB so we only need one
-  # managed Postgres instance on Render. Each connection keeps its own
-  # migration path, so Solid Cache / Solid Queue / Solid Cable tables still
-  # get created in the same DB without interfering with primary schema.
-  cache:
-    <<: *primary_production
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    migrations_paths: db/cable_migrate
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+  # Demo deploy runs on a single PG. The multi-connection (cache/queue/cable)
+  # config that was here previously is intentionally dropped because production
+  # falls back to memory_store + async adapter for the free-tier deploy.

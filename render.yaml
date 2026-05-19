@@ -22,9 +22,6 @@ services:
       # Auto-generated on first deploy; rotated by recreating the service.
       - key: SECRET_KEY_BASE
         generateValue: true
-      # Run Solid Queue inside the Puma process — saves a worker service.
-      - key: SOLID_QUEUE_IN_PUMA
-        value: "true"
       - key: RAILS_LOG_TO_STDOUT
         value: "true"
       - key: RAILS_SERVE_STATIC_FILES
