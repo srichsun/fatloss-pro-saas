@@ -48,5 +48,4 @@ class ApplicationController < ActionController::Base
       @current_tenant = nil
     end
   end
-
 end

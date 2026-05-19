@@ -31,5 +31,4 @@ Rails.application.routes.draw do
   resources :campaign_sales, path: "c", only: [ :show ] do
     resources :flash_orders, only: [ :create ]
   end
-
 end
