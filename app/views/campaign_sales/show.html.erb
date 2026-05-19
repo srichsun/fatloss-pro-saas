@@ -2,8 +2,8 @@
   <div class="max-w-md mx-auto bg-white shadow-lg overflow-hidden md:rounded-b-3xl">
     <% if @campaign.product_image.attached? %>
         <%= image_tag @campaign.product_image.variant(
-              resize_to_limit: [ 1200, 1200 ],
-              saver: { quality: 92, strip: true, lossless: false }
+              resize_to_limit: [ 2000, 2000 ],
+              saver: { quality: 95, strip: true }
             ),
             class: "w-full h-80 object-cover",
             alt: @campaign.title %>
