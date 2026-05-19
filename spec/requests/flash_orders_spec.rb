@@ -22,7 +22,7 @@ RSpec.describe "Flash Orders", type: :request do
     }.to change(FlashOrder, :count).by(1)
 
     expect(response).to redirect_to("/c/#{campaign.id}")
-    expect(flash[:notice]).to match(/Success/)
+    expect(flash[:notice]).to match(/搶購成功/)
   end
 
   it "decrements remaining_stock by exactly one on success" do
@@ -56,7 +56,7 @@ RSpec.describe "Flash Orders", type: :request do
     }.not_to change(FlashOrder, :count)
 
     expect(response).to redirect_to("/c/#{expired.id}")
-    expect(flash[:alert]).to match(/ended/i)
+    expect(flash[:alert]).to match(/結束/)
   end
 
   it "rejects the order with sold-out alert when remaining_stock is zero" do
@@ -67,7 +67,7 @@ RSpec.describe "Flash Orders", type: :request do
     }.not_to change(FlashOrder, :count)
 
     expect(response).to redirect_to("/c/#{sold_out.id}")
-    expect(flash[:alert]).to match(/sold out/i)
+    expect(flash[:alert]).to match(/售完/)
   end
 
   it "does NOT enqueue email when the campaign is sold out" do
@@ -103,7 +103,7 @@ RSpec.describe "Flash Orders", type: :request do
     post_order(campaign_id: 0)
 
     expect(response).to redirect_to(root_path)
-    expect(flash[:alert]).to match(/not found/i)
+    expect(flash[:alert]).to match(/找不到/)
   end
 
   # --- Fail path — unexpected runtime error ---
@@ -116,7 +116,7 @@ RSpec.describe "Flash Orders", type: :request do
     post_order
 
     expect(response).to redirect_to("/c/#{campaign.id}")
-    expect(flash[:alert]).to match(/error/i)
+    expect(flash[:alert]).to match(/錯誤/)
   end
 
   # --- Edge / Boundary ---
@@ -141,7 +141,7 @@ RSpec.describe "Flash Orders", type: :request do
       })
     }.not_to change(FlashOrder, :count)
 
-    expect(flash[:alert]).to match(/sold out/i)
+    expect(flash[:alert]).to match(/售完/)
   end
 
   # --- Isolation — pessimistic lock prevents oversell ---

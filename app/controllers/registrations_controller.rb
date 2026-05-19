@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
       @user.save!
     end
     session[:user_id] = @user.id
-    redirect_to dashboard_path, notice: "Welcome!"
+    redirect_to dashboard_path, notice: "歡迎加入"
   rescue ActiveRecord::RecordInvalid
     render :new, status: :unprocessable_entity
   end

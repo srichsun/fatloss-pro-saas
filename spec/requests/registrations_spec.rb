@@ -39,7 +39,7 @@ RSpec.describe "Registrations", type: :request do
 
     follow_redirect!
     expect(response).to have_http_status(:success)
-    expect(response.body).to include("Storefront Overview")
+    expect(response.body).to include("店家總覽")
   end
 
   # --- Fail path — invalid input ---

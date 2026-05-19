@@ -23,7 +23,7 @@ class FlashCampaignsController < ApplicationController
     @flash_campaign.remaining_stock = @flash_campaign.total_stock
 
     if @flash_campaign.save
-      redirect_to flash_campaigns_path, notice: "Flash sale created successfully!"
+      redirect_to flash_campaigns_path, notice: "活動建立成功"
     else
       render :new, status: :unprocessable_entity
     end

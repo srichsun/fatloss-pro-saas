@@ -1,17 +1,17 @@
 <div class="p-6">
   <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold">Flash Sale Campaigns</h1>
-    <%= link_to "+ Create Activity", new_flash_campaign_path, class: "bg-blue-600 text-white px-4 py-2 rounded-lg" %>
+    <h1 class="text-2xl font-bold">限時搶購活動</h1>
+    <%= link_to "+ 新增活動", new_flash_campaign_path, class: "bg-blue-600 text-white px-4 py-2 rounded-lg" %>
   </div>
 
   <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
     <table class="w-full text-left">
       <thead class="text-gray-400 text-sm uppercase">
         <tr>
-          <th class="pb-4">Product</th>
-          <th class="pb-4">Stock Status</th>
-          <th class="pb-4">Ends At</th>
-          <th class="pb-4">Actions</th>
+          <th class="pb-4">商品</th>
+          <th class="pb-4">庫存</th>
+          <th class="pb-4">截止時間</th>
+          <th class="pb-4">操作</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-100">
@@ -24,10 +24,10 @@
               <span class="text-blue-600 font-bold"><%= campaign.remaining_stock %></span>
               / <%= campaign.total_stock %>
             </td>
-            <td class="py-4"><%= campaign.expired_at.strftime("%b %d, %H:%M") %></td>
+            <td class="py-4"><%= campaign.expired_at.strftime("%m/%d %H:%M") %></td>
             <td class="py-4 space-x-3">
-              <%= link_to "Details", flash_campaign_path(campaign), class: "text-indigo-500 hover:underline" %>
-              <%= link_to "Public Page", campaign_sale_path(campaign), class: "text-blue-500 hover:underline", target: "_blank" %>
+              <%= link_to "詳情", flash_campaign_path(campaign), class: "text-indigo-500 hover:underline" %>
+              <%= link_to "公開頁面", campaign_sale_path(campaign), class: "text-blue-500 hover:underline", target: "_blank" %>
             </td>
           </tr>
         <% end %>

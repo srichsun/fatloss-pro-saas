@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       # Store the intended URL to redirect back after login (Standard UX)
       session[:return_to] = request.fullpath
-      redirect_to login_path, alert: "Please sign in to continue."
+      redirect_to login_path, alert: "請先登入"
     end
   end
 

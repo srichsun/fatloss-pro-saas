@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <h2 class="text-center text-3xl font-extrabold text-gray-900">
-      Start Your Flash Sale Storefront
+      開啟你的限時搶購店家
     </h2>
   </div>
 
@@ -9,34 +9,34 @@
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <%= form_with model: @tenant, url: signup_path, method: :post, class: "space-y-6" do |f| %>
 
-        <%# Tenant Fields (The Storefront) %>
+        <%# 店家資訊 %>
         <div class="border-b border-gray-200 pb-4 mb-4">
-          <h3 class="text-lg font-medium text-gray-900">Step 1: Storefront</h3>
+          <h3 class="text-lg font-medium text-gray-900">步驟 1：店家資訊</h3>
           <div class="mt-4">
-            <%= f.label :name, "Storefront Name", class: "block text-sm font-medium text-gray-700" %>
-            <%= f.text_field :name, name: "tenant[name]", placeholder: "e.g. Iron Gym", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+            <%= f.label :name, "店家名稱", class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :name, name: "tenant[name]", placeholder: "例如：Iron Gym", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
         </div>
 
-        <%# User Fields %>
+        <%# 帳號資訊 %>
         <div>
-          <h3 class="text-lg font-medium text-gray-900">Step 2: Your Account</h3>
+          <h3 class="text-lg font-medium text-gray-900">步驟 2：你的帳號</h3>
           <div class="mt-4">
-            <%= label_tag "user[name]", "Your Name", class: "block text-sm font-medium text-gray-700" %>
+            <%= label_tag "user[name]", "姓名", class: "block text-sm font-medium text-gray-700" %>
             <%= text_field_tag "user[name]", nil, required: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
           <div class="mt-4">
-            <%= label_tag "user[email]", "Email Address", class: "block text-sm font-medium text-gray-700" %>
+            <%= label_tag "user[email]", "電子郵件", class: "block text-sm font-medium text-gray-700" %>
             <%= email_field_tag "user[email]", nil, required: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
           <div class="mt-4">
-            <%= label_tag "user[password]", "Password", class: "block text-sm font-medium text-gray-700" %>
+            <%= label_tag "user[password]", "密碼", class: "block text-sm font-medium text-gray-700" %>
             <%= password_field_tag "user[password]", nil, required: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
         </div>
 
         <div>
-          <%= f.submit "Create Storefront", class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          <%= f.submit "建立店家", class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
         </div>
       <% end %>
     </div>

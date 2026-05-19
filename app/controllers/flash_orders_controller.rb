@@ -6,7 +6,7 @@ class FlashOrdersController < ApplicationController
 
     # Reject expired campaigns early to skip an unnecessary lock acquisition.
     if @campaign.expired?
-      redirect_to campaign_sale_path(@campaign), alert: "Sorry, this flash sale has ended."
+      redirect_to campaign_sale_path(@campaign), alert: "此搶購活動已結束"
       return
     end
 
@@ -26,7 +26,7 @@ class FlashOrdersController < ApplicationController
           # Use deliver_later to send email in background (Asynchronous)
           OrderMailer.confirmation_email(@order).deliver_later
 
-          redirect_to campaign_sale_path(@campaign), notice: "Success! You've secured your spot."
+          redirect_to campaign_sale_path(@campaign), notice: "搶購成功！"
         else
           # If form validation fails, redirect back with error messages
           redirect_to campaign_sale_path(@campaign), alert: @order.errors.full_messages.join(", ")
@@ -34,14 +34,14 @@ class FlashOrdersController < ApplicationController
         end
       else
         # 4. Handle Out of Stock scenario
-        redirect_to campaign_sale_path(@campaign), alert: "Sorry, this item is sold out!"
+        redirect_to campaign_sale_path(@campaign), alert: "很抱歉，商品已售完"
       end
     end
   rescue ActiveRecord::RecordNotFound
-    redirect_to root_path, alert: "Campaign not found."
+    redirect_to root_path, alert: "找不到此活動"
   rescue => e
     logger.error "Flash Order Failure: #{e.message}"
-    redirect_to campaign_sale_path(@campaign), alert: "An error occurred, please try again."
+    redirect_to campaign_sale_path(@campaign), alert: "發生錯誤，請稍後再試"
   end
 
   private

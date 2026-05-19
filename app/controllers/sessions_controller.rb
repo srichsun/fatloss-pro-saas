@@ -11,9 +11,9 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(params[:password]) # # Securely verify password only if the user exists (prevents NoMethodError if user is nil)
       session[:user_id] = user.id
-      redirect_to dashboard_path, notice: "Logged in successfully!"
+      redirect_to dashboard_path, notice: "登入成功"
     else
-      flash.now[:alert] = "Invalid email or password."
+      flash.now[:alert] = "電子郵件或密碼錯誤"
       render :new, status: :unauthorized
     end
   end
@@ -25,10 +25,10 @@ class SessionsController < ApplicationController
     # 2. Support both traditional navigation (HTML) and modern Turbo requests
     respond_to do |format|
       # Traditional redirect for standard browser requests
-      format.html { redirect_to root_path, notice: "Logged out!", status: :see_other }
+      format.html { redirect_to root_path, notice: "已登出", status: :see_other }
 
       # Ensure Turbo handles the redirect correctly after a non-GET request (like DELETE)
-      format.turbo_stream { redirect_to root_path, notice: "Logged out!", status: :see_other }
+      format.turbo_stream { redirect_to root_path, notice: "已登出", status: :see_other }
     end
   end
 end

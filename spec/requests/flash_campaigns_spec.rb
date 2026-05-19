@@ -84,12 +84,12 @@ RSpec.describe "Flash Campaigns", type: :request do
       expect(response.body).to include("/c/#{my_campaign.id}") # public URL surfaced
     end
 
-    it "renders 'No orders yet.' when the campaign has no orders" do
+    it "renders '尚無訂單' when the campaign has no orders" do
       login_as(user)
 
       get flash_campaign_path(my_campaign)
 
-      expect(response.body).to include("No orders yet.")
+      expect(response.body).to include("尚無訂單")
     end
 
     it "lists recent fan orders when they exist" do
