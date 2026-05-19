@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
-# Render build script — runs during deploy.
+# Render build script — runs in an isolated build container that does
+# NOT have access to the private DB network, so migrations live in
+# startCommand (see render.yaml) where the runtime container does.
 set -o errexit
 
 bundle install
 
 # assets:precompile triggers javascript:install + javascript:build
 # (jsbundling-rails) and tailwindcss:build via task dependencies.
-# We don't run yarn/npm install separately because the chain handles it.
 bundle exec rails assets:precompile
-
-# db:prepare creates the database if needed, then runs migrations
-# for every configured connection (primary, cache, queue, cable).
-bundle exec rails db:prepare

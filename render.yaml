@@ -10,7 +10,9 @@ services:
     plan: free
     region: singapore
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec rails server"
+    # Migrations run on container start because the build phase has no
+    # access to the private DB network. db:prepare is idempotent.
+    startCommand: "bundle exec rails db:prepare && bundle exec rails server"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
