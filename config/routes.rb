@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   # Authenticated influencer area
   resource  :dashboard,       only: [ :show ]
-  resources :flash_campaigns, only: [ :index, :new, :create, :show ]
+  resources :flash_campaigns, only: [ :index, :new, :create, :show, :edit, :update ] do
+    post :analyze, on: :member
+  end
 
   # Public fan landing — short path so it fits in IG stories
   resources :campaign_sales, path: "c", only: [ :show ] do
