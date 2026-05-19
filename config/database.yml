@@ -90,18 +90,17 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: fat_loss_pro_production
-    username: fat_loss_pro
-    password: <%= ENV["FAT_LOSS_PRO_DATABASE_PASSWORD"] %>
+    url: <%= ENV["DATABASE_URL"] %>
+  # cache / queue / cable share the primary physical DB so we only need one
+  # managed Postgres instance on Render. Each connection keeps its own
+  # migration path, so Solid Cache / Solid Queue / Solid Cable tables still
+  # get created in the same DB without interfering with primary schema.
   cache:
     <<: *primary_production
-    database: fat_loss_pro_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: fat_loss_pro_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: fat_loss_pro_production_cable
     migrations_paths: db/cable_migrate
