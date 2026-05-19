@@ -17,14 +17,17 @@
       <tbody class="divide-y divide-gray-100">
         <% @flash_campaigns.each do |campaign| %>
           <tr class="text-gray-700">
-            <td class="py-4 font-medium"><%= campaign.title %></td>
+            <td class="py-4 font-medium">
+              <%= link_to campaign.title, flash_campaign_path(campaign), class: "text-indigo-600 hover:underline" %>
+            </td>
             <td class="py-4">
-              <span class="text-blue-600 font-bold"><%= campaign.remaining_stock %></span> 
+              <span class="text-blue-600 font-bold"><%= campaign.remaining_stock %></span>
               / <%= campaign.total_stock %>
             </td>
             <td class="py-4"><%= campaign.expired_at.strftime("%b %d, %H:%M") %></td>
-            <td class="py-4">
-              <%= link_to "Copy Link", campaign_sale_path(campaign), class: "text-blue-500 hover:underline" %>
+            <td class="py-4 space-x-3">
+              <%= link_to "Details", flash_campaign_path(campaign), class: "text-indigo-500 hover:underline" %>
+              <%= link_to "Public Page", campaign_sale_path(campaign), class: "text-blue-500 hover:underline", target: "_blank" %>
             </td>
           </tr>
         <% end %>

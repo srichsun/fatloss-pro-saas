@@ -1,0 +1,75 @@
+<div class="p-6 max-w-4xl mx-auto">
+  <%# Header %>
+  <div class="mb-6">
+    <%= link_to "← Back to Flash Sales", flash_campaigns_path, class: "text-sm text-gray-500 hover:text-gray-700" %>
+    <h1 class="text-3xl font-bold text-slate-900 mt-2"><%= @flash_campaign.title %></h1>
+  </div>
+
+  <%# Status Badge %>
+  <div class="mb-6">
+    <% if @flash_campaign.expired? %>
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700">Ended</span>
+    <% elsif @flash_campaign.remaining_stock.zero? %>
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">Sold Out</span>
+    <% else %>
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">Live</span>
+    <% end %>
+  </div>
+
+  <%# Shareable URL %>
+  <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl mb-6">
+    <p class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">Public Flash Sale URL</p>
+    <code class="block text-sm font-mono text-indigo-700 bg-white px-3 py-2 rounded border border-indigo-200 break-all">
+      <%= campaign_sale_url(@flash_campaign) %>
+    </code>
+  </div>
+
+  <%# Stats Grid %>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+    <div class="bg-white p-5 rounded-2xl border border-slate-200">
+      <p class="text-xs font-medium text-slate-500 uppercase">Price</p>
+      <p class="text-2xl font-bold text-slate-900 mt-1">$<%= @flash_campaign.price %></p>
+    </div>
+    <div class="bg-white p-5 rounded-2xl border border-slate-200">
+      <p class="text-xs font-medium text-slate-500 uppercase">Stock</p>
+      <p class="text-2xl font-bold text-slate-900 mt-1">
+        <span class="text-indigo-600"><%= @flash_campaign.remaining_stock %></span>
+        <span class="text-slate-400 text-base">/ <%= @flash_campaign.total_stock %></span>
+      </p>
+    </div>
+    <div class="bg-white p-5 rounded-2xl border border-slate-200">
+      <p class="text-xs font-medium text-slate-500 uppercase">Ends At</p>
+      <p class="text-lg font-bold text-slate-900 mt-1"><%= @flash_campaign.expired_at.strftime("%b %d, %H:%M") %></p>
+    </div>
+  </div>
+
+  <%# Recent Orders %>
+  <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+      <h2 class="text-lg font-bold text-slate-800">Recent Orders</h2>
+      <span class="text-sm text-slate-500"><%= @flash_campaign.flash_orders.count %> total</span>
+    </div>
+    <% if @recent_orders.any? %>
+      <table class="w-full text-left">
+        <thead>
+          <tr class="text-slate-400 text-xs uppercase tracking-widest border-b border-slate-50">
+            <th class="px-6 py-3">Name</th>
+            <th class="px-6 py-3">Email</th>
+            <th class="px-6 py-3">Placed At</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50">
+          <% @recent_orders.each do |order| %>
+            <tr class="text-sm">
+              <td class="px-6 py-3 font-medium text-slate-700"><%= order.name %></td>
+              <td class="px-6 py-3 text-slate-500"><%= order.email %></td>
+              <td class="px-6 py-3 text-slate-500"><%= order.created_at.strftime("%b %d, %H:%M") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="px-6 py-8 text-center text-sm text-slate-400">No orders yet.</p>
+    <% end %>
+  </div>
+</div>

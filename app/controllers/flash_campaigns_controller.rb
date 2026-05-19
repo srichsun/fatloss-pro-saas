@@ -6,6 +6,12 @@ class FlashCampaignsController < ApplicationController
     @flash_campaigns = current_user.tenant.flash_campaigns.order(created_at: :desc)
   end
 
+  def show
+    # Scoped via tenant to prevent IDOR — a tenant cannot view another tenant's campaign
+    @flash_campaign = current_user.tenant.flash_campaigns.find(params[:id])
+    @recent_orders = @flash_campaign.flash_orders.order(created_at: :desc).limit(20)
+  end
+
   def new
     @flash_campaign = current_user.tenant.flash_campaigns.new
   end
