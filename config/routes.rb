@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   # 2. Fan/Public Landing Page (Publicly accessible)
   # We use a custom path 'c/:id' to make the URL short for IG stories
-  resources :campaign_sales, path: "c", oncology: [ :show ] do
+  resources :campaign_sales, path: "c", only: [ :show ] do
     resources :flash_orders, only: [ :create ]
   end
 
