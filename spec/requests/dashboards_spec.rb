@@ -10,7 +10,7 @@ RSpec.describe "Dashboards", type: :request do
 
     get dashboard_path
     expect(response).to have_http_status(:success)
-    expect(response.body).to include("店家總覽")
+    expect(response.body).to include("活動總覽")
   end
 
   it "redirects to login when not authenticated" do
