@@ -57,6 +57,9 @@ development:
 test:
   <<: *default
   database: fat_loss_pro_test
+  # Higher connection pool so concurrency specs can spawn many threads
+  # against the same DB without blocking on the default 5-connection pool.
+  max_connections: 25
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
