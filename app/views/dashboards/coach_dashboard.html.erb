@@ -6,7 +6,6 @@
     </div>
     <nav class="mt-6 px-4 space-y-2">
       <a href="#" class="block px-4 py-2 bg-indigo-800 rounded-lg text-sm font-medium">Dashboard</a>
-      <%= link_to 'Orders', orders_path, class: "block px-4 py-2 hover:bg-indigo-800 rounded-lg text-sm font-medium transition" %>
       <%= link_to 'Flash Sales', flash_campaigns_path, class: "block px-4 py-2 hover:bg-indigo-800 rounded-lg text-sm font-medium transition" %>
     </nav>
   </aside>
@@ -43,10 +42,9 @@
       <%# Stats Grid %>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-          <p class="text-sm font-medium text-slate-500">Active Orders</p>
+          <p class="text-sm font-medium text-slate-500">Active Flash Sales</p>
           <p class="text-4xl font-black text-indigo-600 mt-2">
-            <%# [INTERVIEW POINT: Performance] Derived from counter_cache column %>
-            <%= current_tenant.orders.count %>
+            <%= current_tenant.flash_campaigns.count %>
           </p>
           <div class="mt-4 flex items-center text-xs text-emerald-600 font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -89,15 +87,7 @@
                   <td class="px-8 py-5 text-slate-500 text-sm">
                     <%= client.email %>
                   </td>
-                  <td class="px-8 py-5 text-right">
-                    <%= link_to new_order_path(client_id: client.id), 
-                        class: "inline-flex items-center justify-center px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-bold shadow-md shadow-indigo-100 hover:bg-indigo-700 hover:shadow-lg transition-all active:scale-95" do %>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-                      </svg>
-                      Create Order
-                    <% end %>
-                  </td>
+                  <td class="px-8 py-5 text-right"></td>
                 </tr>
               <% end %>
             </tbody>
