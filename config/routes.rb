@@ -1,34 +1,24 @@
 Rails.application.routes.draw do
-  root "dashboards#show" # Redirect to login if not authenticated
+  root "dashboards#show"
 
-  # Single entry point for dashboard
-  resource :dashboard, only: [ :show ]
+  # Auth
+  get    "login",  to: "sessions#new"
+  post   "login",  to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
 
-  # Authentication Routes
-  get  "login",  to: "sessions#new"
-  post "login",  to: "sessions#create"
-  delete "/logout", to: "sessions#destroy"
-
-  # Registration Routes (Coach Sign up)
-  get  "signup", to: "registrations#new", as: :signup
+  # Signup
+  get  "signup", to: "registrations#new",    as: :signup
   post "signup", to: "registrations#create"
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # 1. Influencer/Coach Dashboard (Management)
+  # Authenticated influencer area
+  resource  :dashboard,       only: [ :show ]
   resources :flash_campaigns, only: [ :index, :new, :create, :show ]
 
-  # 2. Fan/Public Landing Page (Publicly accessible)
-  # We use a custom path 'c/:id' to make the URL short for IG stories
+  # Public fan landing — short path so it fits in IG stories
   resources :campaign_sales, path: "c", only: [ :show ] do
     resources :flash_orders, only: [ :create ]
   end
+
+  # Rails health probe
+  get "up" => "rails/health#show", as: :rails_health_check
 end
