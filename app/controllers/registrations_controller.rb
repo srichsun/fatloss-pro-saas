@@ -7,11 +7,15 @@ class RegistrationsController < ApplicationController
   end
 
   def create
+    # Build first so @tenant / @user survive a failed save for re-rendering.
+    @tenant = Tenant.new(tenant_params.merge(
+      subdomain: SecureRandom.alphanumeric(8).downcase
+    ))
+    @user = @tenant.users.build(user_params)
+
     ActiveRecord::Base.transaction do
-      @tenant = Tenant.create!(tenant_params.merge(
-        subdomain: SecureRandom.alphanumeric(8).downcase
-      ))
-      @user = @tenant.users.create!(user_params)
+      @tenant.save!
+      @user.save!
     end
     session[:user_id] = @user.id
     redirect_to dashboard_path, notice: "Welcome!"
