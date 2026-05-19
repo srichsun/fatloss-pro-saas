@@ -49,12 +49,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # 3. Helpers
-  def current_tenant
-    @current_tenant
-  end
-
-  def is_root_path?
-    request.path == "/"
-  end
 end

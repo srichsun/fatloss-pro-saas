@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   # Single entry point for dashboard
   resource :dashboard, only: [ :show ]
 
-  get "dashboards/show"
   # Authentication Routes
   get  "login",  to: "sessions#new"
   post "login",  to: "sessions#create"
