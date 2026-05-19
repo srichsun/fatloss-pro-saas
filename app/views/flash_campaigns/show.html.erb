@@ -63,6 +63,7 @@
           <tr class="text-slate-400 text-xs uppercase tracking-widest border-b border-slate-50">
             <th class="px-6 py-3">姓名</th>
             <th class="px-6 py-3">電子郵件</th>
+            <th class="px-6 py-3">聯絡電話</th>
             <th class="px-6 py-3">下單時間</th>
           </tr>
         </thead>
@@ -71,6 +72,7 @@
             <tr class="text-sm">
               <td class="px-6 py-3 font-medium text-slate-700"><%= order.name %></td>
               <td class="px-6 py-3 text-slate-500"><%= order.email %></td>
+              <td class="px-6 py-3 text-slate-500"><%= order.phone %></td>
               <td class="px-6 py-3 text-slate-500"><%= order.created_at.strftime("%m/%d %H:%M") %></td>
             </tr>
           <% end %>
