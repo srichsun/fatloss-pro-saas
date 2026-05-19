@@ -4,6 +4,12 @@ class FlashOrdersController < ApplicationController
   def create
     @campaign = FlashCampaign.find(params[:campaign_sale_id])
 
+    # Reject expired campaigns early to skip an unnecessary lock acquisition.
+    if @campaign.expired?
+      redirect_to campaign_sale_path(@campaign), alert: "Sorry, this flash sale has ended."
+      return
+    end
+
     # 1. Open a transaction to ensure all database operations are atomic
     FlashOrder.transaction do
       # 2. Pessimistic Locking: SELECT ... FOR UPDATE
