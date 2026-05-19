@@ -1,6 +1,7 @@
 databases:
   - name: flashsalepro-db
     plan: free
+    region: singapore
     databaseName: flashsalepro
 
 services:
