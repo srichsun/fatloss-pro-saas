@@ -18,9 +18,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_tenant
-    # [INTERVIEW POINT: Multi-tenancy Strategy]
-    # Derive tenant from authenticated session to ensure strict data isolation.
-    @current_tenant ||= current_user&.tenant
+    # Always populated upstream by the set_current_tenant before_action.
+    # Strict data isolation: derived from authenticated session only.
+    @current_tenant
   end
 
   def logged_in?
